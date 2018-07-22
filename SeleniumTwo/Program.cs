@@ -86,9 +86,9 @@ namespace SeleniumTwo
         public void CleanUp()
         {
             //close window
-            //PropertiesCollection.driver.Close();
+            PropertiesCollection.driver.Close();
 
-            //Console.WriteLine("Closed the browser");
+            Console.WriteLine("Closed the browser");
 
         }
     }

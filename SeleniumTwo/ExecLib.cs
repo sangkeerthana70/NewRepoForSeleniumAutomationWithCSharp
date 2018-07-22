@@ -82,12 +82,12 @@ namespace SeleniumTwo
             //Iterate through the rows and columns of the Table
             for (int row = 1; row <= table.Rows.Count; row++)
             {
-                Console.WriteLine(row);
-                Console.WriteLine(table.Rows.Count);
-                for (int col = 0; col <= table.Columns.Count; col++)
+                Console.WriteLine("Row No: " + row);
+                Console.WriteLine("Row Count: " + table.Rows.Count);
+                for (int col = 0; col < table.Columns.Count; col++)
                 {
-                    Console.WriteLine(col);
-                    Console.WriteLine(table.Columns.Count);
+                    Console.WriteLine("Column No: " + col);
+                    Console.WriteLine("Column Count: " + table.Columns.Count);
                     Datacollection dtTable = new Datacollection()
                     {
                         rowNumber = row,
