@@ -56,11 +56,18 @@ namespace SeleniumTwo
 
 
 
+            //Initialize the Excel sheet by calling the ExecLib.cs
+            ExecLib.PopulateInCollection(@"D:\Data.Xlsx");
+
+
             //login to application by creating an instance  for the LoginPageObject.
             LoginPageObject pageLogin = new LoginPageObject();
-            EAPageObject pageEA = pageLogin.Login("Anuradha", "Sengalvarayan");
+            //EAPageObject pageEA = pageLogin.Login("Anuradha", "Sengalvarayan");
+            EAPageObject pageEA = pageLogin.Login(ExecLib.ReadData(1, "userName"), ExecLib.ReadData(1, "Password"));
 
-            pageEA.FillUserForm("SA", "Anu", "Senthil");
+            //fill user Details
+            //pageEA.FillUserForm("SA", "Anu", "Senthil");
+            pageEA.FillUserForm(ExecLib.ReadData(1, "Initial"), ExecLib.ReadData(1, "MiddleName"), ExecLib.ReadData(1, "FirstName"));
             Console.WriteLine("Executed LoginPage Object and returned EAPageObject");
 
 
@@ -79,9 +86,9 @@ namespace SeleniumTwo
         public void CleanUp()
         {
             //close window
-            PropertiesCollection.driver.Close();
+            //PropertiesCollection.driver.Close();
 
-            Console.WriteLine("Closed the browser");
+            //Console.WriteLine("Closed the browser");
 
         }
     }
