@@ -21,7 +21,7 @@ namespace ReadingSimpleTable
             //Program p = new Program();
 
             Driver = new ChromeDriver();
-            Driver.Navigate().GoToUrl("file:///C:/Users\anuradha/Desktop/Selenium/SimpleTable.html");
+            Driver.Navigate().GoToUrl("file:///C:/Users/anuradha/Desktop/Selenium/SimpleTable.html");
 
             //instantiate a new TablePage
             TablePage page = new TablePage();
