@@ -29,8 +29,18 @@ namespace ReadingSimpleTable
             //reads the Html table
             Utilities.ReadTable(page.table);
 
+            /*
             //get the cell value from the table
             Console.WriteLine(Utilities.ReadCellValue("Firstname", 1));
+            */
+
+            Console.WriteLine("****************************************************************");
+
+            //string formatting for the cell values outputted in the console
+            Console.WriteLine("The  Firstname {0}    LastName {1}  and is Age {2} years old and is a  Gender {3}", 
+                Utilities.ReadCellValue("Firstname", 2), Utilities.ReadCellValue("Lastname", 2), Utilities.ReadCellValue("Age", 2), Utilities.ReadCellValue("Gender", 2));
+
+            Console.WriteLine("****************************************************************");
 
             Console.Read();
         }
