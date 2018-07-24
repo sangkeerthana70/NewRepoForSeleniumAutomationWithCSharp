@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,8 +41,13 @@ namespace ReadingSimpleTable
                     _tableDatacollections.Add(new TableDatacollection
                     {
                         RowNumber = rowIndex,
-                        ColName = colums[colIndex].Text,
-                        ColValue = colValue.Text
+                        //ColName = colums[colIndex].Text,
+                        ColName = colums[colIndex].Text != "" ? 
+                                  colums[colIndex].Text : colIndex.ToString(),
+
+                        ColValue = colValue.Text,
+                        ColumnSpecialValues = colValue.Text != "" ? null :
+                                              colValue.FindElements(By.TagName("input"))
                     });
 
                     //move to next column index
@@ -63,6 +69,47 @@ namespace ReadingSimpleTable
 
             return data;
         }
+        
+        //method to perform an operation on the cell
+        public static void PerformActionOnCell(string columnIndex, string refColumnName, string refColumnValue, string controlToOperate = null)
+        {
+            foreach (int rowNumber in GetDynamicRowNumber(refColumnName, refColumnValue))
+            {
+                var cell = (from e in _tableDatacollections
+                            where e.ColName == columnIndex && e.RowNumber == rowNumber
+                            select e.ColumnSpecialValues).SingleOrDefault();
+
+                //operate on a particular control
+                if (controlToOperate != null && cell != null)
+                {
+                    var returnedControl = (from c in cell
+                                           where c.GetAttribute("value") == controlToOperate
+                                           select c).SingleOrDefault();
+                    returnedControl?.Click();
+                }
+                else
+                {
+                    //if (cell != null) cell.First().Click();
+                    cell?.First().Click();
+
+                }
+            }
+
+            
+
+        }
+
+        private static IEnumerable GetDynamicRowNumber(string columnName, string columnValue)
+        {
+
+            foreach (var table in _tableDatacollections)
+            {
+                //return a dynamic row number
+                if (table.ColName == columnName && table.ColValue == columnValue)
+                    yield return table.RowNumber;
+            }
+        }
+
     }
 
     //custom class
@@ -71,5 +118,7 @@ namespace ReadingSimpleTable
         public int RowNumber { get; set; }
         public string ColName { get; set; }
         public string ColValue { get; set; }
+
+        public IEnumerable<IWebElement> ColumnSpecialValues { get; set; }
     }
 }
