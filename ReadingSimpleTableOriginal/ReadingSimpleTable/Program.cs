@@ -37,7 +37,7 @@ namespace ReadingSimpleTable
             Console.WriteLine("****************************************************************");
 
             //string formatting for the cell values outputted in the console
-            Console.WriteLine("Firstname {0}  LastName {1}  Age {2}  Gender {3}", 
+            Console.WriteLine("The  Firstname {0}    LastName {1}  and is Age {2} years old and is a  Gender {3}", 
                 Utilities.ReadCellValue("Firstname", 2), Utilities.ReadCellValue("Lastname", 2), Utilities.ReadCellValue("Age", 2), Utilities.ReadCellValue("Gender", 2));
 
             Console.WriteLine("****************************************************************");
