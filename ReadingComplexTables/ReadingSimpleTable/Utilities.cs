@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReadingSimpleTable
+namespace ReadingComplexTables
 {
     public class Utilities
     {
@@ -18,11 +18,12 @@ namespace ReadingSimpleTable
         {
             //get all the columns from the table which is <th> tag  in html table
             //this method returns a read only collection og IWebElements
+            Console.WriteLine(table);
             var colums = table.FindElements(By.TagName("th"));
-
+            Console.WriteLine(colums);
             //get all the rows
             var rows = table.FindElements(By.TagName("tr"));
-
+            Console.WriteLine(rows);
             //create row index
             var rowIndex = 0;
 
@@ -73,8 +74,15 @@ namespace ReadingSimpleTable
         //method to perform an operation on the cell
         public static void PerformActionOnCell(string columnIndex, string refColumnName, string refColumnValue, string controlToOperate = null)
         {
+            //Console.WriteLine("Inside PerformActionOnCell");
+            //Console.WriteLine(columnIndex);
+            //Console.WriteLine(refColumnName);
+            //Console.WriteLine(refColumnValue);
+            Console.WriteLine(controlToOperate);
+
             foreach (int rowNumber in GetDynamicRowNumber(refColumnName, refColumnValue))
             {
+
                 var cell = (from e in _tableDatacollections
                             where e.ColName == columnIndex && e.RowNumber == rowNumber
                             select e.ColumnSpecialValues).SingleOrDefault();
@@ -82,14 +90,17 @@ namespace ReadingSimpleTable
                 //operate on a particular control
                 if (controlToOperate != null && cell != null)
                 {
+                    Console.WriteLine("Debug: inside if");
                     var returnedControl = (from c in cell
                                            where c.GetAttribute("value") == controlToOperate
                                            select c).SingleOrDefault();
+
                     returnedControl?.Click();
                 }
                 else
                 {
                     //if (cell != null) cell.First().Click();
+                    Console.WriteLine("Debug: inside else");
                     cell?.First().Click();
 
                 }
@@ -101,10 +112,16 @@ namespace ReadingSimpleTable
 
         private static IEnumerable GetDynamicRowNumber(string columnName, string columnValue)
         {
+            //Console.WriteLine("Inside GetDynamicRowNumber");
+            //Console.WriteLine(columnName);
+            //Console.WriteLine(columnValue);
 
             foreach (var table in _tableDatacollections)
             {
                 //return a dynamic row number
+                //Console.WriteLine(table.ColName);
+                //Console.WriteLine(table.ColValue);
+
                 if (table.ColName == columnName && table.ColValue == columnValue)
                     yield return table.RowNumber;
             }

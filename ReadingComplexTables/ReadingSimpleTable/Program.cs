@@ -1,11 +1,12 @@
 ﻿using OpenQA.Selenium.Chrome;
+using ReadingComplexTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReadingSimpleTable
+namespace ReadingComplexTable
 {
     //add reference for base class
     public class Program : Base
@@ -43,7 +44,14 @@ namespace ReadingSimpleTable
             Console.WriteLine("****************************************************************");
 
             //Delete John
-            Utilities.PerformActionOnCell("5", "FirstName", "John", "Delete");
+            //Console.WriteLine("Calling PerformActionOnCell");
+            //Utilities.PerformActionOnCell("5", "Firstname", "John","Delete");
+
+            //Save John
+            //Utilities.PerformActionOnCell("5", "Firstname", "John", "Save");
+
+            //Click the CheckBox of John by passing the column name
+            Utilities.PerformActionOnCell("Option", "Lastname", "Doe");
 
 
             Console.Read();

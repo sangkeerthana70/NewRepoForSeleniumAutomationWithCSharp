@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReadingSimpleTable
+namespace ReadingComplexTables
 {
     //add reference for base class
     public class TablePage : Base
@@ -18,7 +18,7 @@ namespace ReadingSimpleTable
             PageFactory.InitElements(Driver, this);
         }
 
-        //[FindsBy(How = How.XPath, Using = "//table")]
+        [FindsBy(How = How.XPath, Using = "//table")]
         //add the table in the page as a property of IWebElement data type
         public IWebElement table { get; set; }
     }
