@@ -94,7 +94,7 @@ namespace ReadingComplexTables
                     var returnedControl = (from c in cell
                                            where c.GetAttribute("value") == controlToOperate
                                            select c).SingleOrDefault();
-
+                    //ToDo:Currently only the Click operation is supported, future operations like dropdown not implemented yet.
                     returnedControl?.Click();
                 }
                 else
